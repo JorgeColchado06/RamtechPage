@@ -1,8 +1,34 @@
 "use client";
 
 import Carousel from "@/components/ui/carousel";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+
+
+
+
 
 export default function CarouselDemo() {
+
+  const [featuresRef, featuresInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+    rootMargin: "-50px 0px"
+  });
+  
+  const [faqRef, faqInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+    rootMargin: "-50px 0px"
+  });
+  
+  const [ctaRef, ctaInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+    rootMargin: "-50px 0px"
+  });
+
+
   const slideData1 = [
     {
       title: "Mystic Mountains",
@@ -145,37 +171,64 @@ export default function CarouselDemo() {
 */
 
 
+
+
   return (
     <div className="relative overflow-hidden w-full h-full py-20 space-y-48 mt-20 mb-32">
       {/* Primer carrusel */}
+      <motion.div 
+        ref={ctaRef}
+        initial={{ opacity: 0, y: 30 }}
+        animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="py-16 px-4 ite sm:px-6 lg:px-8 max-w-7xl mx-auto text-center"
+      >
       <div>
-        <h2 className="text-4xl font-bold ml-36 text-white mb-8">
+        <h2 className="text-4xl font-bold justify-center text-white mb-16">
           Tus <span className="relative z-20 inline-block rounded-xl text-[#00ffff]">
           Manuales
         </span>
         </h2>
         <Carousel slides={slideData1} />
       </div>
-
+      </motion.div>
       {/* Segundo carrusel */}
+
+      <motion.div 
+        ref={faqRef}
+        initial={{ opacity: 0, y: 30 }}
+        animate={faqInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="py-16 px-4 ite sm:px-6 lg:px-8 max-w-7xl mx-auto text-center"
+      >
       <div>
-      <h2 className="text-4xl font-bold ml-36 text-white mb-8">
+      <h2 className="text-4xl font-bold justify-center text-white mb-16">
           Recomendaciones <span className="relative z-20 inline-block rounded-xl text-[#00ffff]">
           Para Ti
         </span>
         </h2>
         <Carousel slides={slideData2} />
       </div>
+      </motion.div>
 
       {/* Tercer carrusel */}
-      <div>
-      <h2 className="text-4xl font-bold ml-36 text-white mb-8">
-          Exlusivo de <span className="relative z-20 inline-block rounded-xl text-[#00ffff]">
-          Enterprise
-        </span>
-        </h2>
-        <Carousel slides={slideData3} />
-      </div>
+      <motion.div 
+  ref={featuresRef}
+  initial={{ opacity: 0, y: 30 }}
+  animate={featuresInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+  transition={{ duration: 0.6, ease: "easeOut" }}
+  className="py-16 px-4 ite sm:px-6 lg:px-8 max-w-7xl mx-auto text-center"
+>
+  <div>
+    <h2 className="text-4xl font-bold justity-center text-white mb-16">
+      Exlusivo de <span className="relative z-20 inline-block rounded-xl text-[#00ffff]">
+        Enterprise
+      </span>
+    </h2>
+    <Carousel slides={slideData3} />
+  </div>
+</motion.div>
+
     </div>
   );
 }

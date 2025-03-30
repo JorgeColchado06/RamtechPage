@@ -1,12 +1,16 @@
 "use client";
 import React from "react";
 import PricingPlans from "@/components/ui/PricingPlans";
-import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalTrigger,
+} from "@/components/ui/animated-modal";
 
 export default function PlanesPage() {
-  const router = useRouter();
   
   // Referencias para las animaciones de scroll
   const [featuresRef, featuresInView] = useInView({
@@ -172,17 +176,90 @@ export default function PlanesPage() {
         initial={{ opacity: 0, y: 30 }}
         animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center"
+        className="py-16 px-4 ite sm:px-6 lg:px-8 max-w-7xl mx-auto text-center"
       >
         <div className="bg-gradient-to-r from-[#0a1a1a] to-[#162B3B] p-12 rounded-2xl border border-[#00ffff]/20">
           <h2 className="text-3xl font-bold text-white mb-4">¿Necesitas una solución personalizada?</h2>
           <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">Contacta con nuestro equipo para diseñar un plan que se adapte perfectamente a las necesidades específicas de tu empresa.</p>
-          <button 
-            onClick={() => router.push('/contacto')} 
-            className="px-8 py-3 bg-[#00ffff] text-black font-semibold rounded-full hover:bg-[#00e6e6] transition-all duration-300 shadow-lg"
-          >
-            Contactar ahora
-          </button>
+          <div className="flex justify-center items-center">
+          <Modal>
+              {/* Botón de activación del modal */}
+              <ModalTrigger className="bg-gradient-to-r from-[#224e6a]/80 to-[#3d8eba]/80 border border-[#00ffff]/30 flex items-center group relative px-20 py-5 rounded-lg overflow-hidden shadow-lg hover:shadow-[#00ffff]/20 transition-all duration-300">
+                {/* El contenido ya está definido en el componente ModalTrigger */}
+                <span>
+               
+               </span>
+              </ModalTrigger>
+      
+              {/* Contenido del modal */}
+              <ModalBody>
+                <ModalContent>
+                  <div className="relative mb-6">
+                    <h2 className="text-3xl font-bold mb-2 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#3d8eba] to-[#00ffff]">
+                      Ponte En Contacto
+                    </h2>
+                    <div className="h-1 w-20 bg-gradient-to-r from-[#00ffff]/10 via-[#00ffff]/60 to-[#00ffff]/10 mx-auto"></div>
+                  </div>
+                  
+                  <form className="space-y-6">
+                    {/* Campo de nombre */}
+                    <div className="group">
+                      <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300 group-focus-within:text-[#00ffff]">
+                        Nombre
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="text"
+                          className="w-full px-4 py-3 bg-[rgba(255,255,255,0.03)] border border-[#3d8eba]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00ffff]/40 focus:border-transparent transition-all duration-300 placeholder:text-gray-500 dark:placeholder:text-gray-600"
+                          placeholder="Tu nombre"
+                        />
+                        {/* <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-[#3d8eba] to-[#00ffff] group-focus-within:w-full transition-all duration-300"></div> */}
+                      </div>
+                    </div>
+      
+                    {/* Campo de correo */}
+                    <div className="group">
+                      <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300 group-focus-within:text-[#00ffff]">
+                        Correo Electrónico
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="email"
+                          className="w-full px-4 py-3 bg-[rgba(255,255,255,0.03)] border border-[#3d8eba]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00ffff]/40 focus:border-transparent transition-all duration-300 placeholder:text-gray-500 dark:placeholder:text-gray-600"
+                          placeholder="ejemplo@gmail.com"
+                        />
+                        {/* <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-[#3d8eba] to-[#00ffff] group-focus-within:w-full transition-all duration-300"></div> */}
+                      </div>
+                    </div>
+      
+                    {/* Campo de mensaje */}
+                    <div className="group">
+                      <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300 group-focus-within:text-[#00ffff]">
+                        Mensaje
+                      </label>
+                      <div className="relative">
+                        <textarea
+                          className="w-full px-4 py-3 bg-[rgba(255,255,255,0.03)] border border-[#3d8eba]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00ffff]/40 focus:border-transparent transition-all duration-300 placeholder:text-gray-500 dark:placeholder:text-gray-600"
+                          rows={4}
+                          placeholder="Deja tu mensaje aquí..."
+                        ></textarea>
+                        {/* <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-[#3d8eba] to-[#00ffff] group-focus-within:w-full transition-all duration-300"></div> */}
+                      </div>
+                    </div>
+      
+                    {/* Botón de envío */}
+                    <button
+                      type="submit"
+                      className="w-full bg-gradient-to-r from-[#224e6a]/80 to-[#3d8eba]/80 border border-[#00ffff]/30 text-white py-3 px-4 rounded-lg hover:shadow-lg hover:shadow-[#00ffff]/20 transition-all duration-300 mt-4 font-medium"
+                    >
+                      Enviar Mensaje
+                    </button>
+                  </form>
+                </ModalContent>
+              </ModalBody>
+            </Modal>
+          </div>
+          
         </div>
       </motion.div>
     </div>

@@ -12,7 +12,7 @@ export default function Footer() {
   const [subscribeStatus, setSubscribeStatus] = useState<string | null>(null);
 
   // Oculta el Footer si estás en la página de login o restablecer contraseña
-  if (pathname === "/login" || pathname === "/login/restablecer") {
+  if (pathname === "/login" || pathname === "/restablecer") {
     return null;
   }
   
@@ -109,7 +109,7 @@ export default function Footer() {
             <ul className="space-y-3 text-base">
               <li className="flex items-center gap-3">
                 <FaMapMarkerAlt className="text-[#00ffff]/70" />
-                <span>Madrid, España</span>
+                <span>Ciudad de México, Mexico</span>
               </li>
               <li className="flex items-center gap-3">
                 <FaPhone className="text-[#00ffff]/70" />

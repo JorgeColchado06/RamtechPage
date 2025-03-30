@@ -17,7 +17,7 @@ export default function Navbar() {
   };
 
   // Oculta el Navbar si estás en la página de login
-  if (pathname === "/login" || pathname === "/login/restablecer") {
+  if (pathname === "/login" || pathname === "/restablecer") {
     return null;
   }
 

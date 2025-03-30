@@ -20,8 +20,6 @@ const words1 = "Haz crecer tu negocio con"
 const words = "Ramtech Solutions"
 ;
 
-
-
 import logo_1 from "@/public/logos/apple.svg"
 import logo_2 from "@/public/logos/Wordpress--Streamline-Simple-Icons.svg"
 import logo_3 from "@/public/logos/Asus--Streamline-Simple-Icons.svg"
@@ -198,7 +196,7 @@ const LandingPage = () => {
   </p>
       <Modal>
               {/* Botón de activación del modal */}
-              <ModalTrigger className="bg-gradient-to-r from-[#224e6a]/80 to-[#3d8eba]/80 border border-[#00ffff]/30 flex items-center group relative px-20 py-5 rounded-lg overflow-hidden shadow-lg hover:shadow-[#00ffff]/20 transition-all duration-300">
+              <ModalTrigger className="bg-transparent border border-[#00ffff]/30 flex items-center group relative px-20 py-5 rounded-lg overflow-hidden shadow-lg hover:shadow-[#00ffff]/20 transition-all duration-300">
                 {/* El contenido ya está definido en el componente ModalTrigger */}
                 <span>
                

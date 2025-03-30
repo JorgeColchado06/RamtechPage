@@ -40,7 +40,7 @@ export default function Login() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full h-[50px] rounded-[15px] px-4 border border-[#fff] text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#00ffff]/60"
+              className="w-full h-[50px] rounded-[15px] px-4 border border-[#fff] text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#00ffff]/60 focus:border-transparent transition-all duration-300"
               placeholder="ejemplo@gmail.com"
               required
             />
@@ -54,8 +54,8 @@ export default function Login() {
               type={showPassword ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full h-[50px] rounded-[15px] px-4 border border-[#fff] text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#00ffff]/60"
-              placeholder="escribe tu contraseña"
+              className="w-full h-[50px] rounded-[15px] px-4 border border-[#fff] text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#00ffff]/60 focus:border-transparent transition-all duration-300"
+              placeholder="Escribe tu contraseña"
               required
             />
             <motion.div
@@ -76,7 +76,7 @@ export default function Login() {
           {/* Enlace para restablecer contraseña */}
           <div
             className="text-sm text-gray-100 mb-6 text-left cursor-pointer hover:underline inline-block"
-            onClick={() => router.push("/login/restablecer")}
+            onClick={() => router.push("/restablecer")}
           >
             ¿Olvidaste tu contraseña?
           </div>
