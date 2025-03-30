@@ -1,8 +1,9 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
-import GradientBackground from "./GradientBackground";
+import GradientBackground from "@/components/GradientBackground";
 import ScrollReset from "@/components/ScrollReset"; // Importa el nuevo componente
+import { CartProvider } from "@/components/cart";
 
 import "./globals.css";
 
@@ -24,11 +25,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Navbar />
-        <GradientBackground />
-        <ScrollReset /> {/* Aquí se coloca el reset del scroll */}
-        {children}
-        <Footer />
+        <CartProvider>
+          <Navbar />
+          <GradientBackground />
+          <ScrollReset /> {/* Aquí se coloca el reset del scroll */}
+          {children}
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

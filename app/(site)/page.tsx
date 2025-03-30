@@ -198,62 +198,75 @@ const LandingPage = () => {
   </p>
       <Modal>
               {/* Botón de activación del modal */}
-              <ModalTrigger className="bg-[rgba(0,0,0,0.25)] border border-[#224e6a] flex items-center group relative px-25 py-6 rounded-lg overflow-hidden">
+              <ModalTrigger className="bg-gradient-to-r from-[#224e6a]/80 to-[#3d8eba]/80 border border-[#00ffff]/30 flex items-center group relative px-20 py-5 rounded-lg overflow-hidden shadow-lg hover:shadow-[#00ffff]/20 transition-all duration-300">
+                {/* El contenido ya está definido en el componente ModalTrigger */}
                 <span>
                
-                </span>
-      
+               </span>
               </ModalTrigger>
       
               {/* Contenido del modal */}
               <ModalBody>
                 <ModalContent>
-                  <h2 className="text-3xl font-bold mb-4 text-center">
-                    Ponte En Contacto
-                  </h2>
+                  <div className="relative mb-6">
+                    <h2 className="text-3xl font-bold mb-2 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#3d8eba] to-[#00ffff]">
+                      Ponte En Contacto
+                    </h2>
+                    <div className="h-1 w-20 bg-gradient-to-r from-[#00ffff]/10 via-[#00ffff]/60 to-[#00ffff]/10 mx-auto"></div>
+                  </div>
+                  
                   <form className="space-y-6">
                     {/* Campo de nombre */}
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <div className="group">
+                      <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300 group-focus-within:text-[#00ffff]">
                         Nombre
                       </label>
-                      <input
-                        type="text"
-                        className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ffff]/40"
-                        placeholder="tu nombre"
-                      />
+                      <div className="relative">
+                        <input
+                          type="text"
+                          className="w-full px-4 py-3 bg-[rgba(255,255,255,0.03)] border border-[#3d8eba]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00ffff]/40 focus:border-transparent transition-all duration-300 placeholder:text-gray-500 dark:placeholder:text-gray-600"
+                          placeholder="Tu nombre"
+                        />
+                        {/* <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-[#3d8eba] to-[#00ffff] group-focus-within:w-full transition-all duration-300"></div> */}
+                      </div>
                     </div>
       
                     {/* Campo de correo */}
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <div className="group">
+                      <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300 group-focus-within:text-[#00ffff]">
                         Correo Electrónico
                       </label>
-                      <input
-                        type="email"
-                        className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ffff]/40"
-                        placeholder="ejemplo@gmail.com"
-                      />
+                      <div className="relative">
+                        <input
+                          type="email"
+                          className="w-full px-4 py-3 bg-[rgba(255,255,255,0.03)] border border-[#3d8eba]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00ffff]/40 focus:border-transparent transition-all duration-300 placeholder:text-gray-500 dark:placeholder:text-gray-600"
+                          placeholder="ejemplo@gmail.com"
+                        />
+                        {/* <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-[#3d8eba] to-[#00ffff] group-focus-within:w-full transition-all duration-300"></div> */}
+                      </div>
                     </div>
       
                     {/* Campo de mensaje */}
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <div className="group">
+                      <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300 group-focus-within:text-[#00ffff]">
                         Mensaje
                       </label>
-                      <textarea
-                        className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#00ffff]/40"
-                        rows={4}
-                        placeholder="deja tu mensaje aquí..."
-                      ></textarea>
+                      <div className="relative">
+                        <textarea
+                          className="w-full px-4 py-3 bg-[rgba(255,255,255,0.03)] border border-[#3d8eba]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00ffff]/40 focus:border-transparent transition-all duration-300 placeholder:text-gray-500 dark:placeholder:text-gray-600"
+                          rows={4}
+                          placeholder="Deja tu mensaje aquí..."
+                        ></textarea>
+                        {/* <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-[#3d8eba] to-[#00ffff] group-focus-within:w-full transition-all duration-300"></div> */}
+                      </div>
                     </div>
       
                     {/* Botón de envío */}
                     <button
                       type="submit"
-                      className="w-full bg-transparent border-1 text-white py-2 px-4 rounded-md hover:border-[#00ffff]/40 transition"
+                      className="w-full bg-gradient-to-r from-[#224e6a]/80 to-[#3d8eba]/80 border border-[#00ffff]/30 text-white py-3 px-4 rounded-lg hover:shadow-lg hover:shadow-[#00ffff]/20 transition-all duration-300 mt-4 font-medium"
                     >
-                      Send Message
+                      Enviar Mensaje
                     </button>
                   </form>
                 </ModalContent>

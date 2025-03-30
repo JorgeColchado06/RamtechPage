@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { motion } from "framer-motion";
-import GradientBackground from "@/app/GradientBackground";
+import GradientBackground from "@/components/GradientBackground";
 
 export default function Login() {
   const [email, setEmail] = useState("");

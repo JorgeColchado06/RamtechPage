@@ -5,9 +5,7 @@ export default function GradientBackground() {
         style={{
           background: "radial-gradient(circle at center, #0a1a1a, #000000)",
         }}
-      >
-        {/* Este div crea el gradiente radial que se oscurece hacia las orillas */}
-      </div>
+      />
     )
   }
   
