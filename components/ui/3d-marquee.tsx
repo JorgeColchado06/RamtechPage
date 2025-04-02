@@ -12,21 +12,24 @@ export const ThreeDMarquee = ({
   images: string[];
   className?: string;
 }) => {
-  // Split the images array into 4 equal parts
+  // Split the images array into 4 equal parts for better distribution
   const chunkSize = Math.ceil(images.length / 4);
   const chunks = Array.from({ length: 4 }, (_, colIndex) => {
     const start = colIndex * chunkSize;
     return images.slice(start, start + chunkSize);
   });
+  
+  // Limitar el número de imágenes con prioridad alta para mejorar el rendimiento
+  const priorityImagesCount = 4; // Solo las primeras imágenes tendrán prioridad alta
   return (
     <div
     className={cn(
-      "mx-auto block h-[600px] overflow-hidden rounded-2xl max-sm:h-100",
+      "mx-auto block h-full w-full overflow-hidden rounded-2xl",
       className
     )}
   >
     <div className="flex size-full items-center justify-center">
-      <div className="size-[2200px] shrink-0 scale-50 sm:scale-75 lg:scale-100">
+      <div className="size-[2200px] shrink-0 scale-50 sm:scale-75 lg:scale-100 transition-transform duration-700">
         <div
           style={{
             transform: "rotateX(55deg) rotateY(0deg) rotateZ(-45deg)",
@@ -37,9 +40,10 @@ export const ThreeDMarquee = ({
             <motion.div
               animate={{ y: colIndex % 2 === 0 ? 100 : -100 }}
               transition={{
-                duration: colIndex % 2 === 0 ? 10 : 15,
+                duration: colIndex % 2 === 0 ? 15 : 20,
                 repeat: Infinity,
                 repeatType: "reverse",
+                ease: "easeInOut"
               }}
               key={colIndex + "marquee"}
               className="flex flex-col items-start gap-8"
@@ -60,10 +64,12 @@ export const ThreeDMarquee = ({
                     <Image
                       src={image}
                       alt={`Image ${imageIndex + 1}`}
-                      className="aspect-[970/700] rounded-lg object-cover ring ring-gray-950/5 hover:shadow-2xl"
+                      className="aspect-[970/700] rounded-lg object-cover ring ring-gray-950/5 hover:shadow-2xl transition-all duration-300"
                       width={970}
                       height={700}
-                      priority={true} // Agrega la propiedad priority
+                      priority={imageIndex < priorityImagesCount && colIndex < 2} // Solo prioriza las primeras imágenes
+                      loading={imageIndex < priorityImagesCount && colIndex < 2 ? "eager" : "lazy"} // Carga perezosa para el resto
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                   </motion.div>
                 </div>

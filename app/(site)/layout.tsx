@@ -5,7 +5,7 @@ import GradientBackground from "@/components/GradientBackground";
 import ScrollReset from "@/components/ScrollReset"; // Importa el nuevo componente
 import { CartProvider } from "@/components/cart";
 
-import "./globals.css";
+import "../globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,12 +24,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         <CartProvider>
           <Navbar />
           <GradientBackground />
           <ScrollReset /> {/* Aquí se coloca el reset del scroll */}
-          {children}
+          <main>{children}</main>
           <Footer />
         </CartProvider>
       </body>

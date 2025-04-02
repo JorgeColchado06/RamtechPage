@@ -32,3 +32,33 @@ body {
   color: var(--foreground);
   font-family: 'Palanquin', sans-serif; /* Aplicar la fuente al body */
 }
+
+
+/* Personalización del scrollbar para navegadores basados en WebKit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #224e6a, #3d8eba);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #3d8eba, #00ffff);
+  background-clip: content-box;
+}
+
+/* Personalización del scrollbar para Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3d8eba rgba(0, 0, 0, 0.3);
+}

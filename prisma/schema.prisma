@@ -1,0 +1,109 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  CLIENT
+}
+
+model User {
+  id            String        @id @default(cuid())
+  name          String
+  lastName      String
+  email         String        @unique
+  emailVerified DateTime?
+  password      String
+  phone         String?
+  address       String?
+  image         String?
+  role          UserRole      @default(CLIENT)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  // Relations with other models
+  purchases     Purchase[]
+  subscriptions Subscription[]
+
+  @@index([email])
+}
+
+enum PlanType {
+  BASIC
+  PREMIUM
+  BUSINESS
+}
+
+model Plan {
+  id          String        @id @default(cuid())
+  name        String
+  description String
+  price       Float
+  type        PlanType
+  duration    Int           // Duration in days
+  active      Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  
+  // Relations with other models
+  subscriptions Subscription[]
+}
+
+enum PurchaseStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+  REFUNDED
+}
+
+model Purchase {
+  id          String         @id @default(cuid())
+  userId      String
+  amount      Float
+  date        DateTime       @default(now())
+  status      PurchaseStatus @default(PENDING)
+  reference   String?        // External payment reference
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  
+  // Relations with other models
+  user        User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subscription Subscription?
+
+  @@index([userId])
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  EXPIRED
+  CANCELLED
+}
+
+model Subscription {
+  id          String              @id @default(cuid())
+  userId      String
+  planId      String
+  purchaseId  String              @unique
+  startDate   DateTime            @default(now())
+  endDate     DateTime
+  status      SubscriptionStatus  @default(ACTIVE)
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+  
+  // Relations with other models
+  user        User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan        Plan                @relation(fields: [planId], references: [id])
+  purchase    Purchase            @relation(fields: [purchaseId], references: [id])
+
+  @@index([userId])
+  @@index([planId])
+}
+
