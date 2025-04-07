@@ -9,17 +9,15 @@ import { prisma } from "@/lib/prisma";
 
 const navbar = async () => {
   const session = await auth();
-  const user = await prisma.user.findUnique({
-    where: {
-      id: session?.user?.id,
-    }, 
-  })
-
-  if (!user) {
-    return null;
+  
+  let user = null;
+  if (session?.user?.id) {
+    user = await prisma.user.findUnique({
+      where: {
+        id: session.user.id,
+      }, 
+    });
   }
-
-
   
 
   return (
@@ -56,7 +54,7 @@ const navbar = async () => {
 
 
           {/* Avatar del usuario con funcionalidad de dropdown integrada */}
-          {session ? (
+          {session && user ? (
             <>
               <div className="relative top-[5px]">
                 <Cart />
