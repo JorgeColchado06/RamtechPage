@@ -3,13 +3,23 @@ import GradientBackground from "@/components/GradientBackground";
 import Image from "next/image";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
 import "../globals.css";
 
-export default function RootLayout({
+export default async function RootLayout({
  children
 }: {
  children: React.ReactNode;
 }) {
+  // Verificar si existe una sesión activa
+  const session = await auth();
+  
+  // Si el usuario ya está autenticado, redirigir a la página principal
+  if (session) {
+    redirect('/');
+  }
+
   return (
     <html>
       <body>

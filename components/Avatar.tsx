@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
+import { SignOutButton } from "./auth/SignOutButton";
 
 interface AvatarProps {
   src?: string;
@@ -33,9 +34,7 @@ const Avatar: React.FC<AvatarProps> = ({
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
-  const handleLogout = () => {
-    router.push("/login"); // Redirige a la página de inicio de sesión
-  };
+  // Ya no necesitamos esta función ya que SignOutButton maneja el cierre de sesión
 
   const [imageError, setImageError] = useState(false);
   const imageSize = Math.max(size, 24); // Asegurar un tamaño mínimo para las iniciales
@@ -92,10 +91,9 @@ const Avatar: React.FC<AvatarProps> = ({
               Configuración
             </li>
             <li
-              className="px-4 py-3 hover:bg-[#162B3B] hover:text-[#00ffff] cursor-pointer transition-colors duration-200"
-              onClick={handleLogout}
+              className="px-4 py-3 hover:bg-[#162B3B] hover:text-[#00ffff] transition-colors duration-200"
             >
-              Cerrar Sesión
+              <SignOutButton />
             </li>
           </ul>
         </div>

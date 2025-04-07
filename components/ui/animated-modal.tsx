@@ -41,6 +41,7 @@ export function Modal({ children }: { children: ReactNode }) {
 }
 
 export const ModalTrigger = ({
+    children,
     className,
   }: {
     children: ReactNode;
@@ -55,18 +56,7 @@ export const ModalTrigger = ({
         )}
         onClick={() => setOpen(true)}
       >
-        {/* Texto inicial */}
-        <span className="absolute inset-0 flex items-center justify-center font-bold translate-x-0 group-hover:translate-x-full transition duration-500">
-          Contáctanos
-            <FaChevronRight className="text-white text-lg ml-2" />
-          
-        </span>
-        {/* Texto al hacer hover */}
-        <span className="absolute inset-0 flex items-center justify-center font-bold -translate-x-full group-hover:translate-x-0 transition duration-500">
-            Contáctanos
-            <FaChevronRight className="text-white text-lg ml-2" />
-          
-        </span>
+        {children}
       </button>
     );
   };

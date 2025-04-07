@@ -1,37 +1,46 @@
-"use client";
-import Image from "next/image";
+"use client"
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
+
 import { motion } from "framer-motion";
+
+import Input from "@/components/ui/Input";
+import { redirect } from "next/navigation";
+import { loginWithCredentials } from "@/app/(auth)/actions";
+
 
 
 export default function Login() {
+  
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const router = useRouter();
+
+  
+  
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError("");
     
-    try {
-      // Simulación de autenticación (reemplazar con llamada real a API)
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      console.log({ email, password });
-      // Redirigir a la página principal
-      router.push("/");
-    } catch (err) {
-      setError("Error al iniciar sesión. Verifica tus credenciales.");
-    } finally {
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("password", password);
+    
+    const result = await loginWithCredentials(formData);
+    
+    if (!result.success) {
+      setError(result.error || "Error al iniciar sesión");
       setIsLoading(false);
+    } else  {
+      // Redirigir a la página de inicio
+      redirect("/");
     }
-  };
+  }
+
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-transparent text-white">
@@ -50,19 +59,19 @@ export default function Login() {
             <p className="text-gray-400 text-sm">Ingresa tu correo electrónico para acceder a tu cuenta</p>
           </div>
           
-          <form onSubmit={handleSubmit}>
+          <form 
+            onSubmit={handleSubmit}
+          >
             {/* Campo de email */}
-            <div className="mb-4">
-              <label className="block text-sm font-medium mb-2">Correo electrónico</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 bg-white/5 border border-[#00ffff]/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00ffff]/40 transition-all duration-200"
-                placeholder="correo@ejemplo.com"
-                required
-              />
-            </div>
+            <Input
+              label="Correo electrónico"
+              name="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="correo@ejemplo.com"
+              required
+            />
 
             {/* Campo de contraseña */}
             <div className="mb-4">
@@ -75,23 +84,17 @@ export default function Login() {
                   ¿Olvidaste tu contraseña?
                 </Link>
               </div>
-              <div className="relative">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 bg-white/5 border border-[#00ffff]/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00ffff]/40 transition-all duration-200"
-                  placeholder="••••••••"
-                  required
-                />
-                <button
-                  type="button"
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? <FaEyeSlash size={16} /> : <FaEye size={16} />}
-                </button>
-              </div>
+              <Input
+                name="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                required
+                showPasswordToggle
+                containerClassName="mb-0" // Eliminar el margen inferior porque ya está en el div contenedor
+                labelClassName="hidden" // Ocultar la etiqueta porque ya tenemos una personalizada arriba
+              />
             </div>
 
             {/* Mensaje de error */}
@@ -118,24 +121,24 @@ export default function Login() {
             </button>
 
             {/* Separador */}
-            <div className="flex items-center my-6">
+            {/* <div className="flex items-center my-6">
               <div className="flex-grow h-px bg-gray-600/30"></div>
               <span className="px-3 text-sm text-gray-400">O</span>
               <div className="flex-grow h-px bg-gray-600/30"></div>
-            </div>
+            </div> */}
 
             {/* Botón de Google */}
-            <button
+            {/* <button
               type="button"
               className="w-full py-3 px-4 bg-white/5 border border-[#00ffff]/20 rounded-lg font-medium text-white flex items-center justify-center hover:bg-white/10 transition-all duration-200"
               onClick={() => console.log("Google login")}
             >
               <FaGoogle className="mr-2" size={16} />
               Iniciar sesión con Google
-            </button>
+            </button> */}
 
             {/* Enlace para registrarse */}
-            <div className="text-center mt-6 text-sm text-gray-400">
+            {/* <div className="text-center mt-6 text-sm text-gray-400">
               ¿No tienes una cuenta?{" "}
               <Link 
                 href="/register"
@@ -143,7 +146,7 @@ export default function Login() {
               >
                 Registrarse
               </Link>
-            </div>
+            </div> */}
           </form>
         </div>
       </motion.div>

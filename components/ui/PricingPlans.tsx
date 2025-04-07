@@ -1,11 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 import { useCart } from "@/components/cart";
 
 export default function PricingPlans() {
-  const router = useRouter();
   const [billingPeriod, setBillingPeriod] = useState<"monthly" | "annual">("monthly");
 
   // Precios para planes mensuales y anuales (con descuento del 20% anual)

@@ -4,9 +4,9 @@ import { HiMenu, HiX } from "react-icons/hi";
 import NavLink from "@/components/NavLink";
 import { useState } from "react";
 
-interface MobileMenuProps {}
 
-export default function MobileMenu({}: MobileMenuProps) {
+
+export default function MobileMenu() {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <>

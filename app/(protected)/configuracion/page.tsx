@@ -1,9 +1,7 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 
 export default function Configuracion() {
-  const router = useRouter();
   
   // Estado para las configuraciones del usuario
   const [configData, setConfigData] = useState({
