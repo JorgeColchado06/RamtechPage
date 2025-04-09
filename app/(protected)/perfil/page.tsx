@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Input from "@/components/ui/Input";
 
 export default function Perfil() {
   const router = useRouter();
@@ -80,7 +81,7 @@ export default function Perfil() {
 
         {/* Contenido de la pestaña de Información Personal */}
         {activeTab === "perfil" && (
-          <div className="bg-white dark:bg-[#0a1a1a] p-8 rounded-lg shadow-md">
+          <div className="bg-white/5 backdrop-blur-md border border-[#00ffff]/20 p-8 rounded-2xl shadow-lg">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-xl font-bold text-gray-900 dark:text-white">
                 Información Personal
@@ -88,7 +89,7 @@ export default function Perfil() {
               {!editMode ? (
                 <button
                   onClick={() => setEditMode(true)}
-                  className="px-4 py-2 bg-[#162B3B] text-white rounded-md hover:bg-[#3d8eba] transition-colors duration-200"
+                  className="cursor-pointer bg-gradient-to-r from-[#224e6a] to-[#00ffff]/50 text-white py-2 px-6 rounded-lg font-medium shadow-md hover:shadow-[#00ffff]/20 hover:scale-105 transition-all duration-300"
                 >
                   Editar Información
                 </button>
@@ -96,13 +97,13 @@ export default function Perfil() {
                 <div className="flex space-x-3">
                   <button
                     onClick={handleCancelEdit}
-                    className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors duration-200"
+                    className="cursor-pointer bg-white/10 border border-gray-600/30 text-white py-2 px-6 rounded-lg font-medium shadow-md hover:bg-white/20 hover:scale-105 transition-all duration-300"
                   >
                     Cancelar
                   </button>
                   <button
                     onClick={handleSaveChanges}
-                    className="px-4 py-2 bg-[#00ffff] text-[#0a1a1a] rounded-md hover:bg-[#00ffff]/80 transition-colors duration-200"
+                    className="cursor-pointer bg-gradient-to-r from-[#224e6a] to-[#00ffff]/50 text-white py-2 px-6 rounded-lg font-medium shadow-md hover:shadow-[#00ffff]/20 hover:scale-105 transition-all duration-300"
                   >
                     Guardar Cambios
                   </button>
@@ -113,7 +114,7 @@ export default function Perfil() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="flex flex-col">
                 <div className="flex items-center justify-center mb-6">
-                  <div className="w-32 h-32 bg-[#162B3B] rounded-full flex items-center justify-center text-white text-4xl font-medium">
+                  <div className="w-32 h-32 bg-gradient-to-r from-[#224e6a] to-[#3d8eba] border-2 border-[#00ffff]/30 rounded-full flex items-center justify-center text-white text-4xl font-medium shadow-lg">
                     {userData.nombre.charAt(0)}{userData.apellido.charAt(0)}
                   </div>
                 </div>
@@ -125,87 +126,97 @@ export default function Perfil() {
               <div className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Nombre
-                    </label>
                     {editMode ? (
-                      <input
+                      <Input
                         type="text"
                         name="nombre"
+                        label="Nombre"
                         value={tempData.nombre}
                         onChange={handleInputChange}
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-[#00ffff] focus:border-[#00ffff] dark:bg-[#162B3B] dark:text-white"
                       />
                     ) : (
-                      <p className="text-gray-800 dark:text-gray-200">{userData.nombre}</p>
+                      <>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                          Nombre
+                        </label>
+                        <p className="text-gray-800 dark:text-gray-200">{userData.nombre}</p>
+                      </>
                     )}
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Apellido
-                    </label>
                     {editMode ? (
-                      <input
+                      <Input
                         type="text"
                         name="apellido"
+                        label="Apellido"
                         value={tempData.apellido}
                         onChange={handleInputChange}
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-[#00ffff] focus:border-[#00ffff] dark:bg-[#162B3B] dark:text-white"
                       />
                     ) : (
-                      <p className="text-gray-800 dark:text-gray-200">{userData.apellido}</p>
+                      <>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                          Apellido
+                        </label>
+                        <p className="text-gray-800 dark:text-gray-200">{userData.apellido}</p>
+                      </>
                     )}
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Correo Electrónico
-                  </label>
                   {editMode ? (
-                    <input
+                    <Input
                       type="email"
                       name="email"
+                      label="Correo Electrónico"
                       value={tempData.email}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-[#00ffff] focus:border-[#00ffff] dark:bg-[#162B3B] dark:text-white"
                     />
                   ) : (
-                    <p className="text-gray-800 dark:text-gray-200">{userData.email}</p>
+                    <>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Correo Electrónico
+                      </label>
+                      <p className="text-gray-800 dark:text-gray-200">{userData.email}</p>
+                    </>
                   )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Teléfono
-                  </label>
                   {editMode ? (
-                    <input
+                    <Input
                       type="tel"
                       name="telefono"
+                      label="Teléfono"
                       value={tempData.telefono}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-[#00ffff] focus:border-[#00ffff] dark:bg-[#162B3B] dark:text-white"
                     />
                   ) : (
-                    <p className="text-gray-800 dark:text-gray-200">{userData.telefono}</p>
+                    <>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Teléfono
+                      </label>
+                      <p className="text-gray-800 dark:text-gray-200">{userData.telefono}</p>
+                    </>
                   )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Dirección
-                  </label>
                   {editMode ? (
-                    <input
+                    <Input
                       type="text"
                       name="direccion"
+                      label="Dirección"
                       value={tempData.direccion}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-[#00ffff] focus:border-[#00ffff] dark:bg-[#162B3B] dark:text-white"
                     />
                   ) : (
-                    <p className="text-gray-800 dark:text-gray-200">{userData.direccion}</p>
+                    <>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Dirección
+                      </label>
+                      <p className="text-gray-800 dark:text-gray-200">{userData.direccion}</p>
+                    </>
                   )}
                 </div>
               </div>
@@ -215,7 +226,7 @@ export default function Perfil() {
 
         {/* Contenido de la pestaña de Historial de Compras */}
         {activeTab === "compras" && (
-          <div className="bg-white dark:bg-[#0a1a1a] p-8 rounded-lg shadow-md">
+          <div className="bg-white/5 backdrop-blur-md border border-[#00ffff]/20 p-8 rounded-2xl shadow-lg">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
               Historial de Compras
             </h2>
@@ -223,7 +234,7 @@ export default function Perfil() {
             {historialCompras.length > 0 ? (
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                  <thead className="bg-gray-50 dark:bg-[#162B3B]">
+                  <thead className="bg-gradient-to-r from-[#162B3B] to-[#224e6a] border-b border-[#00ffff]/20">
                     <tr>
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                         Fecha
@@ -239,7 +250,7 @@ export default function Perfil() {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white dark:bg-[#0a1a1a] divide-y divide-gray-200 dark:divide-gray-700">
+                  <tbody className="bg-transparent divide-y divide-[#00ffff]/10">
                     {historialCompras.map((compra) => (
                       <tr key={compra.id}>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
@@ -252,7 +263,7 @@ export default function Perfil() {
                           {compra.precio}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm">
-                          <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${compra.estado === 'Activo' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                          <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${compra.estado === 'Activo' ? 'bg-green-100/20 text-green-400 border border-green-400/30' : 'bg-red-100/20 text-red-400 border border-red-400/30'}`}>
                             {compra.estado}
                           </span>
                         </td>
@@ -271,7 +282,7 @@ export default function Perfil() {
 
         {/* Contenido de la pestaña de Gestión de Cuenta */}
         {activeTab === "cuenta" && (
-          <div className="bg-white dark:bg-[#0a1a1a] p-8 rounded-lg shadow-md">
+          <div className="bg-white/5 backdrop-blur-md border border-[#00ffff]/20 p-8 rounded-2xl shadow-lg">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
               Gestión de Cuenta
             </h2>
@@ -285,7 +296,7 @@ export default function Perfil() {
                   Fecha de registro: {userData.fechaRegistro}
                 </p>
                 <button
-                  className="px-4 py-2 bg-[#162B3B] text-white rounded-md hover:bg-[#3d8eba] transition-colors duration-200 mr-3"
+                  className="cursor-pointer bg-gradient-to-r from-[#224e6a] to-[#00ffff]/50 text-white py-2 px-6 rounded-lg font-medium shadow-md hover:shadow-[#00ffff]/20 hover:scale-105 transition-all duration-300 mr-3"
                   onClick={() => router.push('/configuracion')}
                 >
                   Ir a Configuración
@@ -300,7 +311,7 @@ export default function Perfil() {
                   Descarga una copia de tus datos personales y actividad en la plataforma.
                 </p>
                 <button
-                  className="px-4 py-2 bg-[#162B3B] text-white rounded-md hover:bg-[#3d8eba] transition-colors duration-200"
+                  className="cursor-pointer bg-gradient-to-r from-[#224e6a] to-[#00ffff]/50 text-white py-2 px-6 rounded-lg font-medium shadow-md hover:shadow-[#00ffff]/20 hover:scale-105 transition-all duration-300"
                   onClick={() => alert("Funcionalidad para exportar datos")}
                 >
                   Exportar mis datos
@@ -315,7 +326,7 @@ export default function Perfil() {
                   Al eliminar tu cuenta, perderás acceso a todos tus datos y servicios contratados.
                 </p>
                 <button
-                  className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors duration-200"
+                  className="cursor-pointer bg-gradient-to-r from-red-600/80 to-red-700/80 text-white py-2 px-6 rounded-lg font-medium shadow-md hover:shadow-red-500/20 hover:scale-105 transition-all duration-300"
                   onClick={() => alert("Funcionalidad para eliminar cuenta")}
                 >
                   Eliminar mi cuenta

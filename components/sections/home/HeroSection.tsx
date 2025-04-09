@@ -65,7 +65,7 @@ const HeroSection = async () => {
             Potenciamos tu éxito con soluciones SaaS de vanguardia diseñadas para
             la escalabilidad, la eficiencia y el crecimiento.
         </p>
-        <p>{session?.user?.email}</p>
+        <p className='text-white text-2xl font-bold'>Bienvenido <span className='text-[#00ffff]'>{session?.user?.name}</span></p>
         </div>
     </section>
     {/* Decoración */}
